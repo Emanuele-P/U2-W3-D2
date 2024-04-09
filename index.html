@@ -13,35 +13,40 @@
 </head>
 
 <body>
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-8 col-lg-6 bg-primary rounded text-light">
-                <div id="saved">
-                    <h2>Saved name:</h2>
+    <div class="container">
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-8 col-lg-6 bg-primary rounded text-light">
+                    <div id="saved">
+                        <h2>Saved names:</h2>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container my-3">
-        <div class="row align-items-center flex-column">
-            <div class="col-8 col-lg-6 mb-3">
-                <h4 class="text-secondary fs-5 mb-2">Register your name:</h4>
-                <form>
-                    <div class="mb-3">
-                        <input id="firstName" type="text" placeholder="First name" required>
-                        <input id="lastName" type="text" placeholder="Last name" required>
-                    </div>
-                    <div class="d-flex gap-1">
-                        <button id="save-btn" type="submit" class="btn btn-success">SAVE</button>
-                        <button id="reset-btn" type="button" class="btn btn-outline-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
+        <div class="container my-3">
+            <div class="row align-items-center flex-column">
+                <div class="col-8 col-lg-6 mb-3">
+                    <p class="">This session elapsed time is <span id="timer" class="fw-bold text-primary"></span>
+                        seconds
+                    </p>
+                    <h4 class="fs-5 mb-2">Register your name:</h4>
+                    <form>
+                        <div class="mb-3">
+                            <input id="firstName" type="text" placeholder="First name" required>
+                            <input id="lastName" type="text" placeholder="Last name" required>
+                        </div>
+                        <div class="d-flex gap-1">
+                            <button id="save-btn" type="submit" class="btn btn-success">SAVE</button>
+                            <button id="reset-btn" type="button" class="btn btn-outline-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
 
 
-            <script src="index.js">
-            </script>
+
+                <script src="index.js">
+                </script>
 </body>
 
 </html>

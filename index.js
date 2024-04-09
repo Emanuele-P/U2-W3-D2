@@ -9,21 +9,33 @@ let pElements = []
 
 const FULLNAME_MEMORY = 'fullname-memory'
 
+function loadSavedNames() {
+  const savedNames = JSON.parse(localStorage.getItem(FULLNAME_MEMORY) || '[]')
+  savedNames.forEach((fullname) => {
+    addNameToList(fullname)
+  })
+}
+
+function addNameToList(fullname) {
+  let input = document.createElement('p')
+  input.innerText = fullname
+  savedList.appendChild(input)
+  pElements.push(input)
+}
+
 form.addEventListener('submit', (event) => {
   event.preventDefault()
 
   const name = nameInput.value
   const surname = surnameInput.value
-  const fullname = name + ' ' + surname
+  const fullname = `${name} ${surname}`
 
-  localStorage.setItem(FULLNAME_MEMORY, fullname)
+  const savedNames = JSON.parse(localStorage.getItem(FULLNAME_MEMORY) || '[]')
+  savedNames.push(fullname)
+  localStorage.setItem(FULLNAME_MEMORY, JSON.stringify(savedNames))
   console.log('Saved')
 
-  let input = document.createElement('p')
-  input.innerText = `${fullname}`
-  savedList.appendChild(input)
-
-  pElements.push(input)
+  addNameToList(fullname)
 })
 
 resetBtn.addEventListener('click', () => {
@@ -34,31 +46,38 @@ resetBtn.addEventListener('click', () => {
     localStorage.removeItem(FULLNAME_MEMORY)
     form.reset()
     pElements.forEach((p) => p.remove())
-    pElements.length = 0
+    pElements.length = []
   } else {
     console.log('refused')
   }
 })
+
+document.addEventListener('DOMContentLoaded', loadSavedNames)
 
 //timer ------------
 
 const START_MEMORY = 'starting-time'
 
 const startTimer = function () {
-  const startingTime = new Date().getTime()
+  let startingTime = sessionStorage.getItem(START_MEMORY)
 
-  sessionStorage.setItem(START_MEMORY, startingTime)
+  if (!startingTime) {
+    startingTime = new Date().getTime()
+
+    sessionStorage.setItem(START_MEMORY, startingTime)
+  }
   timer()
 }
 
 const timer = function () {
-  const startingTime = sessionStorage.getItem(START_MEMORY)
+  const startingTime = parseInt(sessionStorage.getItem(START_MEMORY), 10)
   setInterval(() => {
     const current = new Date().getTime()
     const elapsed = current - startingTime
     const ELAPSEDTIME_MEMORY = 'elapsed-time'
     const convertToSeconds = Math.floor(elapsed / 1000)
-    sessionStorage.setItem(ELAPSEDTIME_MEMORY, convertToSeconds)
+    document.getElementById('timer').innerText = `${convertToSeconds}`
+    sessionStorage.setItem(ELAPSEDTIME_MEMORY, convertToSeconds.toString())
   }, 1000)
 }
 
