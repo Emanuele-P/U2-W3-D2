@@ -40,27 +40,26 @@ resetBtn.addEventListener('click', () => {
   }
 })
 
+//timer ------------
+
+const START_MEMORY = 'starting-time'
+
 const startTimer = function () {
   const startingTime = new Date().getTime()
-  sessionStorage.setItem('startingTime', startingTime)
+
+  sessionStorage.setItem(START_MEMORY, startingTime)
   timer()
 }
 
-// const showStartingTime = function () {
-//   const startingTime = sessionStorage.getItem('startingTime')
-//   console.log(`startingTime: ${new Date(parseInt(startingTime)).toString()}`)
-// }
-
 const timer = function () {
-  const startingTime = sessionStorage.getItem('startingTime')
+  const startingTime = sessionStorage.getItem(START_MEMORY)
   setInterval(() => {
     const current = new Date().getTime()
     const elapsed = current - startingTime
+    const ELAPSEDTIME_MEMORY = 'elapsed-time'
     const convertToSeconds = Math.floor(elapsed / 1000)
-    sessionStorage.setItem('ELAPSED_TIME', convertToSeconds)
-    //console.log(`Current session elapsed time: ${convertToSeconds}s`)
+    sessionStorage.setItem(ELAPSEDTIME_MEMORY, convertToSeconds)
   }, 1000)
 }
 
 startTimer()
-// showStartingTime()
